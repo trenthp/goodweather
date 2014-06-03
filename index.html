@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>[IV. Bind Cities] GOOD Weather</title>
+	<title>[V. Geolocation] GOOD Weather</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -81,7 +81,23 @@
 
 			loadWeather(cities[city.toLowerCase()]);
 
+			if (city.toLowerCase() == "current location") {
+				if ( navigator.geolocation )
+					navigator.geolocation.getCurrentPosition(loadWeather,loadDefaultCity);
+				else {
+					loadDefaultCity();
+				}
+ 
+			} else {
+				loadWeather(cities[city.toLowerCase()]);
+			}
+			
 		}
+		
+		function loadDefaultCity(){
+			loadCity("New York");
+		}
+
 		
 		
 		// On Page Load
